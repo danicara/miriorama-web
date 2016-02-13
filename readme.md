@@ -8,3 +8,5 @@ Accademia di Belle Arti di Cuneo
 
 Tesi di laurea triennale in Nuove Tecnologie per l'Arte
 a.a. 2015-2016
+
+Website live here: http://danicara.github.io/miriorama-web/
