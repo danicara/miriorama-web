@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="width: 100%;height: 100%;float: left;display: none;" id="mySvg">
+	<!--<rect x="0" y="0" width="100%" height="100%" style="fill:rgb(0,0,0);" id="tt"></rect>
+	<rect x="50%" y="0" width="50%" height="100%" style="fill: rgb(72,72,72);"></rect>
+	<rect x="50%" y="0" width="25%" height="100%" style="fill: rgb(108, 108, 108);"></rect>
+	<rect x="50%" y="0" width="12.5%" height="100%" style="fill: rgb(156, 156, 156);"></rect>
+	<rect x="50%" y="0" width="6.250%" height="100%" style="fill: rgb(189, 189, 189);"></rect>
+	<rect x="50%" y="0" width="3.125%" height="100%" style="fill: rgb(255, 255, 255);"></rect>-->
+
+
+			    	<rect x="0" y="0" width="100%" height="100%" style="fill:rgb(0,0,0);"></rect>
+					<rect x="51.53%" y="0" width="48.4%" height="100%" style="fill: rgb(72,72,72);"></rect>
+  					<rect x="51.53%" y="0" width="23.5%" height="100%" style="fill: rgb(108, 108, 108);"></rect>
+  					<rect x="51.53%" y="0" width="10.9%" height="100%" style="fill: rgb(156, 156, 156);"></rect>
+					<rect x="51.53%" y="0" width="4.65%" height="100%" style="fill: rgb(189, 189, 189);"></rect>
+					<rect x="51.53%" y="0" width="1.53%" height="100%" style="fill: rgb(255, 255, 255);"></rect>
+				</svg>
