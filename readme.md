@@ -1,5 +1,5 @@
-MIRIORAMA WEB
-Digitalizzazione dell'Arte Programmata tra tautologia e tecnologia
+#MIRIORAMA WEB
+######Digitalizzazione dell'Arte Programmata tra tautologia e tecnologia
 
 Candidato: Daniele Caraglio
 Relatore: Federico Maiocco
