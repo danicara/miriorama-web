@@ -2,18 +2,17 @@ window['menuItemClicked'] = false;
 window['menuItemAnimation'] = false;
 
 var data = {artists: [
-  {id: "munari", artist: "Bruno Munari", initials: "BM", title: "Perturbazione cibernetica", year: "1961"},
-  {id: "gerstner", artist: "Karl Gerstner", initials: "KG", title: "Eccentrico tangenziale", year: "1961"},
-  {id: "barrese", artist: "Antonio Barrese", initials: "AB", title: "Dischi stroboscopici", year: "1960"},
-  {id: "chiggio", artist: "Ennio L. Chiggio", initials: "EC", title: "Struttura visiva - Anelli alternati margini mobili", year: "1964-1968"},
-  {id: "varisco", artist: "Grazia Varisco", initials: "GV", title: "Schema luminoso variabile", year: "1965"},
-  {id: "apollonio", artist: "Marina Apollonio", initials: "MA", title: "Dinamica circolare 6S + S", year: "1966"},
-  {id: "biasi", artist: "Alberto Biasi", initials: "AB", title: "Gocce", year: "1967"}
-  /*{id: "massironi", artist: "Manfredo Massironi", initials: "MM", title: "Quadrati rotanti", year: "19**"},*/
+  {id: "munari", artist: "Bruno Munari", title: "Perturbazione cibernetica", year: "1953"},
+  {id: "gerstner", artist: "Karl Gerstner", title: "Eccentrico tangenziale", year: "1956"},
+  {id: "barrese", artist: "Antonio Barrese", title: "Dischi stroboscopici", year: "1964"},
+  {id: "chiggio", artist: "Ennio L. Chiggio", title: "Struttura visiva - Anelli alternati margini mobili", year: "1964-1968"},
+  {id: "varisco", artist: "Grazia Varisco", title: "Schema luminoso variabile", year: "1965"},
+  {id: "apollonio", artist: "Marina Apollonio", title: "Dinamica circolare 6S + S", year: "1966"},
+  {id: "biasi", artist: "Alberto Biasi", title: "Gocce", year: "1967"}
 ]};
 
 $(function(){
-  "use strict"
+  'use strict'
 
   //generazione menu
   var source = $("#menu-template").html();
@@ -35,32 +34,15 @@ $(function(){
     }
     $('#home .container').html(template(data));
 
-
-
     //gestione hover menu-item
-    $('.menu-item').hover(function(){
-      if (window['menuItemClicked'] === false && window['menuItemAnimation'] === false) {
-        var artistId = $(this).attr('data-artist');
-
-        TweenMax.to('.menu-desc-item.default', 0.2, {opacity: 0, y: 10, ease: Power3.easeOut});
-
-        $('.menu-desc-item.visible').removeClass('visible');
-        $('.menu-desc-item[data-artist="' + artistId + '"]').addClass('visible');
-      }
-    }, function(){
-      if (window['menuItemClicked'] === false && window['menuItemAnimation'] === false) {
-        $('.menu-desc-item.visible').removeClass('visible');
-        TweenMax.to('.menu-desc-item.default', 0.2, {opacity: 1, y: 0, ease: Power3.easeOut});
-      }
+    $('.menu-item').hover(hoverOn, hoverOff);
+    $('.hover').bind('touchstart touchend', function(e) {
+      e.preventDefault();
+      hoverOn();
     });
+
     //gestione click menu-item
-    $('.menu-item').click(function(){
-      if (window['menuItemClicked'] === false && window['menuItemAnimation'] === false) {
-        window['menuItemClicked'] = true;
-        var artistId = $(this).attr('data-artist');
-        location.href = '#' + artistId;    
-      }
-    });
+    $('.menu-item').click(click);
 
     $(window).bind('hashchange', function(e) {
       hashChange();
@@ -68,6 +50,31 @@ $(function(){
     hashChange();
   });
 });
+
+function hoverOn() {
+  if (window['menuItemClicked'] === false && window['menuItemAnimation'] === false) {
+    var artistId = $(this).attr('data-artist');
+
+    TweenMax.to('.menu-desc-item.default', 0.2, {opacity: 0, y: 10, ease: Power3.easeOut});
+
+    $('.menu-desc-item.visible').removeClass('visible');
+    $('.menu-desc-item[data-artist="' + artistId + '"]').addClass('visible');
+  }
+}
+function hoverOff() {
+  if (window['menuItemClicked'] === false && window['menuItemAnimation'] === false) {
+    $('.menu-desc-item.visible').removeClass('visible');
+    TweenMax.to('.menu-desc-item.default', 0.2, {opacity: 1, y: 0, ease: Power3.easeOut});
+  }
+}
+
+function click() {
+  if (window['menuItemClicked'] === false && window['menuItemAnimation'] === false) {
+    window['menuItemClicked'] = true;
+    var artistId = $(this).attr('data-artist');
+    location.href = '#' + artistId;    
+  }
+}
 
 function hashChange() {  
   var sectionId = window.location.hash.substr(1);
@@ -88,7 +95,7 @@ function showSection(idToShow) {
   //hide 
   if ($sectionToHide.length) {
     //nascondo il menu, la descrizione e gli step
-    $('.dots, .section-desc, #' + idToHide + ' .step').removeClass('visible');
+    $('.dots, .section-desc, .bottom-right, #' + idToHide + ' .step').removeClass('visible').addClass('hidden');
 
     //se ho una sezione da nascondere
     if (typeof miriorama[idToHide].hide === 'function') {
@@ -118,7 +125,7 @@ function showSection(idToShow) {
     }
 
     //nel mentre mostro i dots e le desc
-    var $desc = $('.dots, .section-desc');
+    var $desc = $('.dots, .section-desc, .bottom-right');
     if (idToShow != 'home') {
       //imposto il colore dei dots
       if ($sectionToShow.hasClass('negative')) {
@@ -145,28 +152,26 @@ function showSection(idToShow) {
     }
 
     //transizione dettaglio opacity
-    TweenMax.to($sectionToShow, 1, { opacity: 1, onComplete: function () {
-
-      //transizione custom sezione
-      if (typeof miriorama[idToShow].show === 'function') {
-        miriorama[idToShow].show(function(){
-          if (idToShow == 'home') {
-            $('.section-desc-artist').html('Daniele Caraglio');
-            $('.section-desc-title').html('<span style="margin-bottom: 2px;display: inline-block;line-height: 1.5em;">Relatore: Federico Maiocco</span> <br> Accademia di Belle Arti di Cuneo <br> Tesi di laurea triennale in Nuove Tecnologie per l\'Arte');
-            $('.section-desc-year').html('a.a 2015-2016');
-            $('.section-desc').removeClass('negative').addClass('visible');
-          }
-          window['menuItemAnimation'] = false;
-          $('#home .menu-item').removeClass('reset-cursor');
-        });
-      } else {
-        window['menuItemAnimation'] = false;    
-        $('#home .menu-item').removeClass('reset-cursor');    
+    TweenMax.to($sectionToShow, 1, { 
+      opacity: 1, 
+      onComplete: function () {
+        //transizione custom sezione
+        if (typeof miriorama[idToShow].show === 'function') {
+          miriorama[idToShow].show(function(){
+            if (idToShow == 'home') {
+              $('.section-desc-artist').html('Daniele Caraglio');
+              $('.section-desc-title').html('<span style="margin-bottom: 2px;display: inline-block;line-height: 1.5em;">Relatore: Federico Maiocco</span> <br> Accademia di Belle Arti di Cuneo <br> Tesi di laurea triennale in Nuove Tecnologie per l\'Arte');
+              $('.section-desc-year').html('a.a 2015-2016');
+              $('.section-desc, .bottom-right').removeClass('negative').addClass('visible');
+            }
+            window['menuItemAnimation'] = false;
+            $('#home .menu-item').removeClass('reset-cursor');
+          });
+        } else {
+          window['menuItemAnimation'] = false;    
+          $('#home .menu-item').removeClass('reset-cursor');    
+        }
       }
-    }});
+    });
   }
-}
-
-function rnd(n) {
-  return n.toFixed(2)
 }

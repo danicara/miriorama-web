@@ -2,135 +2,13 @@
  * Miriorama.js
  */
 ;(function(window, document, undefined) {
-
-  // Strict Mode
   'use strict';
 
-  // Constants
   var NAME = 'Miriorama';
-  var MAGIC_NUMBER = 30;
-  var DEFAULTS = {
-    relativeInput: false,
-    clipRelativeInput: false
-  };
   var animations = {};
 
-  function Miriorama(element, options) {
-    // DOM Context
-    this.element = element;
-
-    // Compose Settings Object
-    this.extend(this, DEFAULTS, options);
-
-    // States
-    this.calibrationTimer = null;
-
-    // Callbacks
-    this.onDeviceOrientation = this.onDeviceOrientation.bind(this);
-
-    // Initialize
-    this.initialize();
+  function Miriorama() {
   }
-
-  Miriorama.prototype.extend = function() {
-    if (arguments.length > 1) {
-      var master = arguments[0];
-      for (var i = 1, l = arguments.length; i < l; i++) {
-        var object = arguments[i];
-        for (var key in object) {
-          master[key] = object[key];
-        }
-      }
-    }
-  };
-
-  Miriorama.prototype.camelCase = function(value) {
-    return value.replace(/-+(.)?/g, function(match, character){
-      return character ? character.toUpperCase() : '';
-    });
-  };
-
-  Miriorama.prototype.desktop = !navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|BB10|mobi|tablet|opera mini|nexus 7)/i);
-  Miriorama.prototype.vendors = [null,['-webkit-','webkit'],['-moz-','Moz'],['-o-','O'],['-ms-','ms']];
-  Miriorama.prototype.motionSupport = !!window.DeviceMotionEvent;
-  Miriorama.prototype.orientationSupport = !!window.DeviceOrientationEvent;
-
-
-  Miriorama.prototype.initialize = function() {
-    if (!String.format) {
-      String.format = function(format) {
-        var args = Array.prototype.slice.call(arguments, 1);
-        return format.replace(/{(\d+)}/g, function(match, number) { 
-          return typeof args[number] != 'undefined'
-            ? args[number] 
-            : match
-          ;
-        });
-      };
-    }
-
-    if (!Math.roundTwoDecimal) {
-      Math.roundTwoDecimal = function(n) {
-        return Math.round(n * 100) / 100;          
-      }
-    }
-
-    if (!Math.roundOneDecimal) {
-      Math.roundOneDecimal = function(n) {
-        return Math.round(n * 10) / 10;          
-      }
-    }
-    
-  };
-
-  Miriorama.prototype.enable = function() {
-    if (!this.enabled) {
-      this.enabled = true;
-      if (this.orientationSupport) {
-        this.portrait = null;
-        window.addEventListener('deviceorientation', this.onDeviceOrientation);
-        setTimeout(this.onOrientationTimer, this.supportDelay);
-      } else {
-        this.cx = 0;
-        this.cy = 0;
-        this.portrait = false;
-        window.addEventListener('mousemove', this.onMouseMove);
-      }
-      window.addEventListener('resize', this.onWindowResize);
-    }
-  };
-
-  Miriorama.prototype.onDeviceOrientation = function(event) {
-
-    // Validate environment and event properties.
-    if (!this.desktop && event.beta !== null && event.gamma !== null) {
-
-      // Set orientation status.
-      this.orientationStatus = 1;
-
-      // Extract Rotation
-      var x = (event.beta  || 0) / MAGIC_NUMBER; //  -90 :: 90
-      var y = (event.gamma || 0) / MAGIC_NUMBER; // -180 :: 180
-
-      // Detect Orientation Change
-      var portrait = this.wh > this.ww;
-      if (this.portrait !== portrait) {
-        this.portrait = portrait;
-        this.calibrationFlag = true;
-      }
-
-      // Set Calibration
-      if (this.calibrationFlag) {
-        this.calibrationFlag = false;
-        this.cx = x;
-        this.cy = y;
-      }
-
-      // Set Input
-      this.ix = x;
-      this.iy = y;
-    }
-  };
 
 /******************************************************************************
 Home
@@ -184,9 +62,6 @@ Bruno Munari
 ******************************************************************************/
 
   Miriorama.prototype.munari = {};
-  Miriorama.prototype.munari.sshow = function() { 
-
-  }
   Miriorama.prototype.munari.initialize = function() { 
     var canvas = new fabric.Canvas('munariCanvas');
     canvas.selection = false;
@@ -300,11 +175,169 @@ Bruno Munari
   }
 
 /******************************************************************************
+Karl Gerstner
+******************************************************************************/
+
+  var gerstnerCountClick = 1;
+  Miriorama.prototype.gerstner = {};
+  Miriorama.prototype.gerstner.hide = function (callback) {
+      for (var i = 0; i < 5; i++) {
+        TweenMax.to('#gerstner .circle-' + (i+1), 1, {rotation: 0, force3D: true});
+      }
+      $('#gerstner .step').removeClass('visible');
+
+      callback();
+  }
+  Miriorama.prototype.gerstner.initialize = function() {
+    var variations = {
+      0: [   0,   0,   0,   0,   0],
+      1: [   0,   4,   8,  15,  36],
+      2: [  90,   4,   8,  15,  36],
+      3: [ 180, -11, -23, -58,   0],
+      4: [ 270, -27, -63,   0,   0],
+      5: [   0, -45, -45, -45, -45],
+      6: [   0, -60, -60, -60,   0],
+      7: [   0,  90,  90,  90,   0],
+      8: [   0, -90, -90, -90,   0],
+      9: [   0, 180, 180, 180, 180],
+     10: [   0, 180,  90,  45,   0],
+     11: [   0, 360, 180,  90,  45],
+     12: [   0,  45,  90, 180,   0],
+    };
+
+    $('#gerstner').click(function(){
+      for (var i = 0; i < 5; i++) {
+        TweenMax.to('#gerstner .circle-' + (i+1), 1, {rotation: variations[gerstnerCountClick][i], force3D: true});
+      }
+
+      $('#gerstner .step').removeClass('visible');
+      $('#gerstner .step-' + (gerstnerCountClick + 1)).toggleClass('visible');
+
+      gerstnerCountClick += 1;
+
+      if (gerstnerCountClick == 13) {
+        gerstnerCountClick = 0;
+      }
+    });
+
+    //Draggable.create("#gerstner .circle", {type: "rotation", throwProps: true, throwResistance: 1});
+  } 
+
+/******************************************************************************
+Antonio Barrese
+******************************************************************************/
+
+  Miriorama.prototype.barrese = {};
+  Miriorama.prototype.barrese.hide = function(callback) {
+    var tl = new TimelineMax();
+    tl.eventCallback("onComplete", callback);
+    tl.to(animations['barrese-animation'], 1, {timeScale: 0});
+  };
+  Miriorama.prototype.barrese.initialize = function() {
+    var canvas = new fabric.Canvas('barreseCanvas');
+    canvas.selection = false;
+    canvas.renderOnAddRemove = false;
+
+    window.addEventListener('resize', resizeCanvas, false);
+    resizeCanvas();
+
+    function resizeCanvas() {
+      var $container = $('#barrese .container');
+      canvas.clear();
+      canvas.setHeight($container.height());
+      canvas.setWidth($container.width());
+      canvas.backgroundColor = 'white';
+
+      var f = canvas.width / 100;
+
+      canvas.clipTo = function (ctx) {
+        ctx.arc(f*100 / 2,f*100 / 2,f*90 / 2,0,2*Math.PI);
+      };
+
+      var r = 40 * f;
+      var n = 48;
+      var nCircle = 8;
+      var width = 100 * f;
+      var height = 100 * f;
+      var angle = 0;
+      var step;
+
+      var group = new fabric.Group();
+      group.setOptions({
+        originX: 'center',
+        originY: 'center',
+        top: height/2,
+        left: width/2,
+        selectable: false,
+        hasControls: false,
+        width: width,
+        height: height
+      });
+
+      for (var c = 0; c < nCircle; c++) { 
+        step = (2*Math.PI) / n;
+
+        for (var i = 0; i < n; i++) { 
+            var x = width/2 + r * Math.cos(angle);
+            var y = height/2 + r * Math.sin(angle);
+
+            var circle = new fabric.Circle({
+              radius: 2 * f, fill: 'black', left: x - width/2, top: y - width/2, selectable: false, originX: 'center',originY: 'center'
+            });
+            group.add(circle); 
+
+            angle += step;
+        }
+        r -=  5 * f;
+        n -= 6;
+      }
+
+      canvas.add(group); 
+      canvas.renderAll();
+
+      animations['barrese-animation'] = TweenMax.to('#barreseCanvas', 1, {rotation: 720, ease:Linear.easeNone, repeat: -1});
+      animations['barrese-animation'].timeScale(0);
+
+      /*canvas.on('mouse:down', function() {
+         TweenLite.to(tween, 4, {timeScale: 1});
+      });*/
+
+      /*canvas.on('touch:drag', function(options) {
+        var pointer = canvas.getPointer(options.e);
+        var posY = pointer.y;
+
+
+
+        var speedUp = Math.roundOneDecimal(((posY / canvas.height) -1 ) * -1);
+                console.log(speedUp);
+        if (speedUp >= 0) {
+          TweenLite.to(tween, 1, {timeScale: speedUp});
+        }
+      });*/
+
+      var start = false;
+      canvas.on('mouse:down', function() {
+
+        $('#barrese .step-1').toggleClass('visible');
+        $('#barrese .step-2').toggleClass('visible');
+
+        if (start) {
+          start = false;
+          TweenLite.to(animations['barrese-animation'], 8, {timeScale: 0});
+        } else {
+          start = true;
+          TweenLite.to(animations['barrese-animation'], 8, {timeScale: 1});
+        }
+      });
+    }
+  }
+
+/******************************************************************************
 Ennio Chiggio
 ******************************************************************************/
 
   var countClick = 1;
-  Miriorama.prototype.chiggio = {};
+  Miriorama.prototype.chiggio = { };
   Miriorama.prototype.chiggio.initialize = function() {
     var $container = $('#chiggio .container');
     var positions = [[0,0,180,0],[0,90,180,-90],[-45,-135,315,-135]];
@@ -375,7 +408,7 @@ Ennio Chiggio
         return false;
     }});
       
-    $('#chiggio').click(function(){
+    $('#chiggio').on('mousedown touchstart', function(){
       $('#chiggio .svg-wrapper').each(function(i) {
         TweenMax.to($(this), '2', {rotation: positions[countClick][i], ease: Power4.easeInOut});
       });
@@ -386,335 +419,9 @@ Ennio Chiggio
       }
     });
 
-    $('#chiggio .svg-wrapper').click(function() {
+    $('#chiggio .svg-wrapper').on('mousedown touchstart', function() {
       return false;
     });
-  }
-
-  Miriorama.prototype.chiggio2 = {};
-  Miriorama.prototype.chiggio2.initialize = function() {
-    var n = 15;
-    var tot = 100;
-
-    var stepDeg = 15;
-    var startDeg = stepDeg;
-    var currentDeg;
-
-    var s = Snap('#chiggioSvg');
-
-    var x = 0;
-    var y = 0;
-    var w = Math.roundTwoDecimal(tot/n);
-    var h = Math.roundTwoDecimal(tot/n);
-    for (var r = 1; r <= 15; r++) {
-      currentDeg = startDeg;
-
-      for (var c = 1; c <= 15; c++) {
-        var maskRect = s.rect(x, y, w, h).attr({fill: '#fff'});
-        var mask = s.mask();
-        mask.add(maskRect);
-        var black = s.rect(x - w/2, y - h/2, w, h*2).attr({
-            fill: '#000',
-            //mask: mask,
-            class: 'black',
-            'transform' : 'rotate('+ currentDeg +', ' + Math.roundTwoDecimal(x + w/2) + ', ' + Math.roundTwoDecimal(y + h/2) + ')'
-        });
-
-        var g = s.group(black)
-        g.attr({mask: mask});
-
-        currentDeg = currentDeg - stepDeg;
-        x += w;
-      }
-      y += h;
-      x = 0;
-      startDeg = startDeg - stepDeg;
-    }
-
-    //s.select('.black').animate({transform: 'rotate(2 50 50)'}, 1000);
-
-    
-    //var tl = new TimelineLite({paused:true});
-    //tl.add(TweenLite.to('.black', 1, {rotation: '+=' + 180, transformOrigin:"100% 50%"}));
-
-    /*$('.container').hover(
-    function(){
-      tl.play();
-      
-              //TweenLite.to('.half', 1, {rotation: '+=180', transformOrigin:"100% 50%",repeat: -1});
-            },
-            function(){
-            tl.reverse();
-          });*/
-  }
-
-/******************************************************************************
-Massironi
-******************************************************************************/
-
-  Miriorama.prototype.massironi = function(){};
-  Miriorama.prototype.massironi.initialize = function() {
-    getSquare('svg-1',1);
-    getSquare('svg-2',-1);
-    getSquare('svg-3',-1);
-    getSquare('svg-4',1);
-
-    /*var tl = new TimelineLite();
-    tl.from('#massironi rect', 5, {rotation:0, transformOrigin:"50% 50%", attr:{x:0, y:0, width:100, height:100}});
-
-    $('.container').hover(
-      function() {
-        tl.timeScale(5).reverse();
-      },
-      function(){
-        tl.play();
-    });*/
-
-    function getSquare(id, neg) {
-      var s = Snap("#" + id);
-      var size = 100;
-
-      var deg = 3;
-      var degFirstValue = deg;
-      var degDef = 0;
-      var rad, factor, offset;
-      for (var i = 1; i <= 15; i++) {
-        /* --------- */
-        if (i == 1) {
-          degFirstValue = deg;
-          deg = 0;
-        } else if (i == 2) {
-          deg = degFirstValue;
-        }
-        deg = (i == 1 ? 0 : deg * 1.17);
-        degDef = degDef + deg;
-        /* --------- */
-
-        rad =  toRadiants(deg);
-        factor = 1 / (Math.sin(rad) + Math.cos(rad));
-        var newSize = 100 * factor;
-        size = newSize * size / 100;
-        offset = ((100 - size) /2)
-        //console.log(degDef);
-
-        var myRect = s.rect(offset, offset, size, size);
-        myRect.attr({
-          fill: "transparent",
-          stroke: "#000",
-          'strokeAlignment': 'inner',
-          strokeWidth: 0.5,
-          'transform' : 'rotate('+ degDef * neg + ' ' + 100/2 + ' ' + 100/2 + ')',
-          class: 'test'
-        });                   
-      }
-    }
-
-    function toRadiants(deg) {
-      return deg * Math.PI / 180;
-    }
-  }
-  Miriorama.prototype.massironi.show = function() {
-  }
-
-  var gerstnerCountClick = 1;
-  Miriorama.prototype.gerstner = {};
-  Miriorama.prototype.gerstner.show = function () {
-
-  }
-  Miriorama.prototype.gerstner.hide = function (callback) {
-      for (var i = 0; i < 5; i++) {
-        TweenMax.to('#gerstner .circle-' + (i+1), 1, {rotation: 0, force3D: true});
-      }
-      $('#gerstner .step').removeClass('visible');
-
-      callback();
-  }
-  Miriorama.prototype.gerstner.initialize = function() {
-    var variations = {
-      0: [  0,  0,  0,  0,  0],
-      1: [  0, 4, 8, 15, 36],
-      2: [  90, 4, 8, 15, 36],
-      3: [  180, -11, -23, -58, 0],
-      4: [  270, -27, -63, 0, 0],
-
-      5: [  0,-45,-45,-45,-45],
-      6: [  0,-60,-60,-60,0],
-      7: [  0, 90, 90, 90,0],
-      8: [  0,-90,-90,-90,0],
-      9: [  0,180,180,180,180],
-     10: [  0,180, 90, 45,  0],
-     11: [  0,360,180,90,45],
-     12: [  0,45, 90, 180,  0],
-    };
-
-    $('#gerstner').click(function(){
-      for (var i = 0; i < 5; i++) {
-        TweenMax.to('#gerstner .circle-' + (i+1), 1, {rotation: variations[gerstnerCountClick][i], force3D: true});
-      }
-
-      $('#gerstner .step').removeClass('visible');
-      $('#gerstner .step-' + (gerstnerCountClick + 1)).toggleClass('visible');
-
-      gerstnerCountClick += 1;
-
-      if (gerstnerCountClick == 13) {
-        gerstnerCountClick = 0;
-      }
-    });
-
-    //Draggable.create("#gerstner .circle", {type: "rotation", throwProps: true, throwResistance: 1});
-  } 
-
-
-  Miriorama.prototype.apollonio = {};
-  Miriorama.prototype.apollonio.show = function () {
-
-  }
-  Miriorama.prototype.apollonio.hide = function (callback) {
-
-    callback();
-  }
-  Miriorama.prototype.apollonio.initialize = function(){
-    var size = 100;
-    var s = Snap('#apollonio svg');
-    var x = 0, y = 0;
-    var r = 0;
-
-    for (var i = 0; i < 36; i++) { 
-      var offset = ((100 - size) /2 );
-
-      var min = offset - 100/36;
-      var max = offset + 100/36;
-      var sinArg = ((2 * Math.PI * i) / 36);
-      var ooo = (max - min) * Math.sin(sinArg); 
-
-      var left =  offset - ooo * 1.1;
-
-      x = left + (size/2);
-      y = 50;
-      r = size/2
-
-      
-
-      var circle = s.circle(x, y, r).attr({
-        fill: (i %2 == 1 ?  '#000' : '#fff'),
-      });
-      size = size - (100/36); 
-    }
-
-    Draggable.create("#apollonio .svg-container", {type: "rotation", throwProps: true, throwResistance: 1});
-/*
-    $('#apollonio').click(function() {
-      var rotation = 365 * 5 ;
-      $('#apollonioSvg').css({'transform' : 'rotate('+ rotation +'deg)'});
-    });*/
-  }
-
-/******************************************************************************
-Antonio Barrese
-******************************************************************************/
-
-  Miriorama.prototype.barrese = {};
-  Miriorama.prototype.barrese.show = function() {   
-
-  }
-  Miriorama.prototype.barrese.hisde = function(callback) { 
-    var tl = new TimelineMax();
-    tl.eventCallback("onComplete", callback);
-  }
-  Miriorama.prototype.barrese.initialize = function() {
-    var canvas = new fabric.Canvas('barreseCanvas');
-    canvas.selection = false;
-    canvas.renderOnAddRemove = false;
-
-    window.addEventListener('resize', resizeCanvas, false);
-    resizeCanvas();
-
-    function resizeCanvas() {
-      var $container = $('#barrese .container');
-      canvas.clear();
-      canvas.setHeight($container.height());
-      canvas.setWidth($container.width());
-
-      var f = canvas.width / 100;
-      var r = 40 * f;
-      var n = 48;
-      var nCircle = 8;
-      var width = 100 * f;
-      var height = 100 * f;
-      var angle = 0;
-      var step;
-
-      var group = new fabric.Group();
-      group.setOptions({
-        originX: 'center',
-        originY: 'center',
-        top: height/2,
-        left: width/2,
-        selectable: false,
-        hasControls: false,
-        width: width,
-        height: height
-      });
-
-      for (var c = 0; c < nCircle; c++) { 
-        step = (2*Math.PI) / n;
-
-        for (var i = 0; i < n; i++) { 
-            var x = width/2 + r * Math.cos(angle);
-            var y = height/2 + r * Math.sin(angle);
-
-            //console.log(x, y);
-
-            var circle = new fabric.Circle({
-              radius: 2 * f, fill: 'white', left: x - width/2, top: y - width/2, selectable: false, originX: 'center',originY: 'center'
-            });
-            group.add(circle); 
-
-            angle += step;
-        }
-        r -=  5 * f;
-        n -= 6;
-      }
-
-      canvas.add(group); 
-      canvas.renderAll();
-
-      var tween = TweenMax.to('#barreseCanvas', 1, {rotation: 720, ease:Linear.easeNone, repeat: -1});
-      tween.timeScale(0);
-
-      /*canvas.on('mouse:down', function() {
-         TweenLite.to(tween, 4, {timeScale: 1});
-      });*/
-
-      /*canvas.on('touch:drag', function(options) {
-        var pointer = canvas.getPointer(options.e);
-        var posY = pointer.y;
-
-
-
-        var speedUp = Math.roundOneDecimal(((posY / canvas.height) -1 ) * -1);
-                console.log(speedUp);
-        if (speedUp >= 0) {
-          TweenLite.to(tween, 1, {timeScale: speedUp});
-        }
-      });*/
-
-      var start = false;
-      canvas.on('mouse:down', function() {
-
-        $('#barrese .step-1').toggleClass('visible');
-        $('#barrese .step-2').toggleClass('visible');
-
-        if (start) {
-          start = false;
-          TweenLite.to(tween, 8, {timeScale: 0});
-        } else {
-          start = true;
-          TweenLite.to(tween, 8, {timeScale: 1});
-        }
-      });
-    }
   }
 
 /******************************************************************************
@@ -722,17 +429,12 @@ Grazia Varisco
 ******************************************************************************/
 
   Miriorama.prototype.varisco = {};
-  Miriorama.prototype.varisco.shasow = function() {   
-    var tl = new TimelineMax();
-
-  }
   Miriorama.prototype.varisco.hide = function(callback) { 
     var tl = new TimelineMax();
     tl.eventCallback("onComplete", callback);
 
     tl.to(animations['varisco-bottom'], 1, {timeScale: 0});
     tl.to(animations['varisco-top'], 1, {timeScale: 0}, "-=1");
-
   }
   Miriorama.prototype.varisco.initialize = function() {
     var $container = $('#varisco .container');
@@ -900,18 +602,58 @@ Grazia Varisco
       TweenLite.to('#variscoCanvasBottom', 0, {rotation: -this.rotation});
     }*/
   }
+}
+
+
+/******************************************************************************
+Marina Apollonio
+******************************************************************************/
+
+  Miriorama.prototype.apollonio = {};
+  Miriorama.prototype.apollonio.initialize = function(){
+    var size = 100;
+    var s = Snap('#apollonio svg');
+    var x = 0, y = 0;
+    var r = 0;
+
+    for (var i = 0; i < 36; i++) { 
+      var offset = ((100 - size) /2 );
+
+      var min = offset - 100/36;
+      var max = offset + 100/36;
+      var sinArg = ((2 * Math.PI * i) / 36);
+      var ooo = (max - min) * Math.sin(sinArg); 
+
+      var left =  offset - ooo * 1.1;
+
+      x = left + (size/2);
+      y = 50;
+      r = size/2
+
+      
+
+      var circle = s.circle(x, y, r).attr({
+        fill: (i %2 == 1 ?  '#000' : '#fff'),
+      });
+      size = size - (100/36); 
     }
 
+    Draggable.create("#apollonio .svg-container", {type: "rotation", throwProps: true, throwResistance: 1});
+    /*
+    $('#apollonio').click(function() {
+      var rotation = 365 * 5 ;
+      $('#apollonioSvg').css({'transform' : 'rotate('+ rotation +'deg)'});
+    });*/
+  }
+
+
+/******************************************************************************
+Alberto Biasi
+******************************************************************************/
 
   Miriorama.prototype.biasi = {};
-  Miriorama.prototype.biasi.show = function(callback) {  
- 
-  }
-  Miriorama.prototype.biasi.haide = function(callback) { 
-    
-  }
   Miriorama.prototype.biasi.initialize = function() { 
-    var canvas = new fabric.Canvas('biasiCanvas');
+    var canvas = new fabric.Canvas('biasiCanvasBottom');
     var canvasTop = new fabric.Canvas('biasiCanvasTop');
     canvas.selection = false;
     canvasTop.selection = false;

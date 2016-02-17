@@ -8,9 +8,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta name="msapplication-tap-highlight" content="no" />
 
-        <link href='https://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
-		<link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,700,900' rel='stylesheet' type='text/css'>
-		<link href='https://fonts.googleapis.com/css?family=Arapey' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Merriweather:400,700" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Arapey" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="vendors/normalize.css">
         <link rel="stylesheet" href="resources/css/style.css">
 
@@ -51,19 +51,15 @@
         <script src="resources/js/miriorama.js"></script>
  	</head>
     <body>
-    	<div class="background"></div>
-
     	<div class="navigation">
     		<a class="dots" href="#home">
-				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100%" height="100%" viewBox="0 0 595.28 595.28" enable-background="new 0 0 595.28 595.28" xml:space="preserve">
-					<circle fill="transparent" stroke="rgb(35, 31, 32)" stroke-width="15" stroke-miterlimit="10" cx="298.336" cy="179.167" r="29.999"/>
-					<circle fill="transparent" stroke="rgb(35, 31, 32)" stroke-width="15" stroke-miterlimit="10" cx="297.641" cy="416.673" r="29.999"/>
-					<circle fill="transparent" stroke="rgb(35, 31, 32)" stroke-width="15" stroke-miterlimit="10" cx="297.641" cy="298.5" r="29.999"/>
+				<svg viewBox="0 0 100 100">
+					<circle fill="transparent" stroke="rgb(30, 30, 30)" stroke-width="3" stroke-miterlimit="10" cx="50" cy="30" r="5"/>
+					<circle fill="transparent" stroke="rgb(30, 30, 30)" stroke-width="3" stroke-miterlimit="10" cx="50" cy="50" r="5"/>
+					<circle fill="transparent" stroke="rgb(30, 30, 30)" stroke-width="3" stroke-miterlimit="10" cx="50" cy="70" r="5"/>
 				</svg>
             </a>
     	</div>
-
-        <div id="txt" style="position: fixed;bottom: 0; left: 0;z-index:5;"></div>
 
         <div class="section-desc">
 			<div class="section-desc-artist"></div>
@@ -73,6 +69,11 @@
 
         <div id="home" class="section">
         	<div class="container">       		
+			</div>
+
+			<div class="bottom-right">
+				<a href="https://github.com/danicara/miriorama-web" title="Codice sorgente su GitHub"><img class="github-icon" src="resources/css/img/github.png" alt="Source on Github"></a>
+				<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" title="Licenza Creative Commons"><img alt="Licenza Creative Commons" style="border-width:0" src="resources/css/img/creative-commons.png" /></a>
 			</div>
         </div>
 
@@ -88,16 +89,16 @@
 
 		<div id="chiggio" class="section negative">
 			<div class="container">
-				<div class="chiggio1 svg-wrapper" style=" ">
+				<div class="chiggio1 svg-wrapper">
 					<svg id="chiggio1" class="circle" preserveAspectRatio="xMinYMin meet" viewBox="0 0 100 100"></svg>
 				</div>
-				<div class="chiggio2 svg-wrapper" style=" ">
+				<div class="chiggio2 svg-wrapper">
 					<svg id="chiggio2" class="circle " preserveAspectRatio="xMinYMin meet" viewBox="0 0 100 100"></svg>
 				</div>
-				<div class="chiggio3 svg-wrapper" style=" ">
+				<div class="chiggio3 svg-wrapper">
 					<svg id="chiggio3" class="circle" preserveAspectRatio="xMinYMin meet" viewBox="0 0 100 100"></svg>
 				</div>
-				<div class="chiggio4 svg-wrapper" style=" ">
+				<div class="chiggio4 svg-wrapper">
 					<svg id="chiggio4" class="circle" preserveAspectRatio="xMinYMin meet" viewBox="0 0 100 100"></svg>
 				</div>
 			</div>
@@ -108,26 +109,9 @@
 				</div>
 			</div>
 		</div>
-
-		<div id="massironi" class="section">
-			<div class="container mycontainer">
-				<svg id="svg-1" class="box" style="height:50%; width:50%;" preserveAspectRatio="xMinYMin meet" viewBox="0 0 100 100"></svg>
-				<svg id="svg-2" class="box" style="height:50%; width:50%;" preserveAspectRatio="xMinYMin meet" viewBox="0 0 100 100"></svg>
-				<svg id="svg-3" class="box" style="height:50%; width:50%;" preserveAspectRatio="xMinYMin meet" viewBox="0 0 100 100"></svg>
-				<svg id="svg-4" class="box" style="height:50%; width:50%;" preserveAspectRatio="xMinYMin meet" viewBox="0 0 100 100"></svg>
-			</div>
-		</div>
-
+		
 		<div id="gerstner" class="section">
 			<div class="container">
-				<svg style="display:none;">
-			    	<rect x="0" y="0" width="100%" height="100%" style="fill:rgb(0,0,0);"></rect>
-					<rect x="75%" y="0" width="25%" height="100%" style="fill: rgb(72,72,72);"></rect>
-  					<rect x="62.5%" y="0" width="12.6%" height="100%" style="fill: rgb(108, 108, 108);"></rect>
-  					<rect x="56.25%" y="0" width="6.25%" height="100%" style="fill: rgb(156, 156, 156);"></rect>
-					<rect x="53.125%" y="0" width="3.125%" height="100%" style="fill: rgb(189, 189, 189);"></rect>
-					<rect x="51.5625%" y="0" width="1.5625%" height="100%" style="fill: rgb(255, 255, 255);"></rect>
-				</svg>
 				<div class="circle circle-1">
 					<div class="circle circle-2">
 						<div class="circle circle-3">
@@ -142,30 +126,25 @@
 
 			<div class="steps">
 				<div class="step step-1"><span class="action">Tocca</span> per cambiare configurazione.</div>
-
 				<div class="step step-2">Rotazione cerchi da destra dall'unità inferiore</div>
 				<div class="step step-3">Rotazione dall'unità minore verso sinistra</div>
 				<div class="step step-4">Rotazione dalle due unità minori verso destra</div>
 				<div class="step step-5">Rotazione dalle tre unità minori verso destra</div>
-
 				<div class="step step-6">Rotazione cerchi per 45° verso sinistra</div>
 				<div class="step step-7">Rotazione cerchi per 60° verso sinistra</div>
 				<div class="step step-8">Rotazione cerchi per 90° verso destra</div>
 				<div class="step step-9">Rotazione cerchi per 90° verso sinistra</div>
 				<div class="step step-10">Rotazione cerchi per 180°</div>
-
 				<div class="step step-11">Rotazione progressiva per 180°, 90°, 45° verso destra</div>
 				<div class="step step-12">Rotazione progressiva per 360°, 180°, 90°, 45° verso destra</div>
 				<div class="step step-13">Rotazione progressiva per 45°, 90°, 180° verso destra</div>
-
-
 			</div>
 		</div>
 
 		<div id="apollonio" class="section">
 			<div class="container">
 				<div class="svg-container">
-					<svg class="box" style="height:100%; width:100%" preserveAspectRatio="xMinYMin meet" viewBox="0 0 100 100"></svg>
+					<svg viewBox="0 0 100 100"></svg>
 				</div>
 			</div>
 
@@ -187,8 +166,8 @@
 
     	<div id="varisco" class="section negative">
 			<div class="container">
-				<canvas id="variscoCanvasBottom" width="200px" height="200px" style=""></canvas>
-        		<canvas id="variscoCanvasTop" width="200px" height="200px" style=""></canvas>
+				<canvas id="variscoCanvasBottom"></canvas>
+        		<canvas id="variscoCanvasTop"></canvas>
 			</div>
 
 			<div class="steps">
@@ -199,7 +178,7 @@
 
     	<div id="biasi" class="section">
 			<div class="container">
-				<canvas id="biasiCanvas"></canvas>
+				<canvas id="biasiCanvasBottom"></canvas>
         		<canvas id="biasiCanvasTop"></canvas>
 			</div>
 

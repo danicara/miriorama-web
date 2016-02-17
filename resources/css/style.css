@@ -46,7 +46,7 @@ body {
   animation: fadeOut 1s; }
   .section-desc .section-desc-artist {
     font-size: 1em;
-    font-weight: bold;
+    font-weight: 700;
     margin-bottom: 2px;
     white-space: nowrap; }
   .section-desc .section-desc-title {
@@ -107,7 +107,7 @@ body {
     transform: translateY(10px); } }
 .step .action {
   font-style: italic;
-  font-weight: bold; }
+  font-weight: 700; }
 
 .container {
   width: 90vw;
@@ -280,7 +280,7 @@ body {
     width: 100%;
     height: 100%; }
   #home .menu-item-artist {
-    font-weight: bold;
+    font-weight: 700;
     font-size: 3.5vmin; }
   #home .menu-item-title {
     font-size: 3.5vmin;
@@ -304,6 +304,23 @@ body {
   #home .menu-desc-item.default .menu-item-title {
     font-family: 'Roboto', sans-serif;
     font-size: 2.3vmin; }
+  #home .bottom-right {
+    position: fixed;
+    bottom: 4vh;
+    right: 4vh;
+    height: 20px;
+    opacity: 0;
+    display: none; }
+    #home .bottom-right img {
+      height: 20px; }
+  #home .bottom-right.hidden {
+    display: block;
+    opacity: 0;
+    animation: fadeOut 1s; }
+  #home .bottom-right.visible {
+    display: block;
+    opacity: 1;
+    animation: fadeIn 1s; }
 
 /* Munari -------------------------------------------------------------------- */
 #munari .container {
@@ -413,6 +430,9 @@ body {
     box-shadow: 0 0 15px 0px #aaa;
     border-radius: 50%;
     overflow: hidden; }
+  #apollonio .svg-container {
+    height: 100%;
+    width: 100%; }
   #apollonio .circle {
     border-radius: 50%;
     height: 100%;
@@ -620,7 +640,14 @@ BIASI
     opacity: 0;
     transition-duration: 1s;
     text-align: center;
-    width: 100%; } }
+    width: 100%;
+    font-size: 0.8em; }
+
+  #home .bottom-right {
+    bottom: 2vh;
+    right: initial;
+    width: 100%;
+    text-align: center; } }
 /*
 // Medium devices (tablets, 48em and up)
 @media (min-width: 48em) { }*/

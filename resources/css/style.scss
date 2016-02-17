@@ -54,7 +54,7 @@ body {
 
   .section-desc-artist {
     font-size: 1em;
-  	font-weight: bold;
+  	font-weight: 700;
     margin-bottom: 2px;
   	white-space: nowrap;
   }
@@ -134,7 +134,7 @@ body {
 
 .step .action {
   font-style: italic;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .container {
@@ -207,7 +207,7 @@ body {
 
 #home {
 	display: block;
-  background: radial-gradient(circle, #fff 10%, #ddd 120%);
+  	background: radial-gradient(circle, #fff 10%, #ddd 120%);
 	height: 100%;
 	opacity: 1;
 
@@ -361,7 +361,7 @@ body {
 	}
 
 	.menu-item-artist {
-    font-weight: bold;
+    font-weight: 700;
     font-size: 3.5vmin;
 	}
 	.menu-item-title {
@@ -395,6 +395,32 @@ body {
 	.menu-desc-item.default .menu-item-title {
     font-family: 'Roboto', sans-serif;
     font-size: 2.3vmin;
+	}
+
+	.bottom-right {
+		position:fixed;
+		bottom: 4vh;
+		right: 4vh;
+		height: 20px;
+
+		opacity: 0;
+		display: none;
+
+		img {
+			height: 20px;
+		}
+	}
+
+	.bottom-right.hidden {
+		display: block;
+		opacity: 0;
+		animation: fadeOut 1s;
+	}
+
+	.bottom-right.visible {
+		display: block;
+		opacity: 1;
+		animation: fadeIn 1s;
 	}
 }
 
@@ -565,6 +591,11 @@ body {
     	border-radius: 50%;
 		overflow: hidden;
 	}	
+
+	.svg-container {
+		height: 100%;
+    width: 100%;
+	}
 
 	#apollonioSvg {
   		//transition: transform 15s;
@@ -870,6 +901,14 @@ BIASI
     transition-duration: 1s;
     text-align: center;
     width: 100%;
+    font-size: 0.8em;
+	}
+
+	#home .bottom-right {
+    bottom: 2vh;
+    right: initial;
+    width: 100%;
+    text-align: center;
 	}
 }
 /*
