@@ -36,13 +36,10 @@ $(function(){
 
     //gestione hover menu-item
     $('.menu-item').hover(hoverOn, hoverOff);
-    $('.hover').bind('touchstart touchend', function(e) {
-      e.preventDefault();
-      hoverOn();
-    });
 
     //gestione click menu-item
     $('.menu-item').click(click);
+
 
     $(window).bind('hashchange', function(e) {
       hashChange();
@@ -50,6 +47,11 @@ $(function(){
     hashChange();
   });
 });
+
+function isTouchDevice() {
+  return 'ontouchstart' in window        // works on most browsers 
+      || navigator.maxTouchPoints;       // works on IE10/11 and Surface
+};
 
 function hoverOn() {
   if (window['menuItemClicked'] === false && window['menuItemAnimation'] === false) {
@@ -64,11 +66,13 @@ function hoverOn() {
 function hoverOff() {
   if (window['menuItemClicked'] === false && window['menuItemAnimation'] === false) {
     $('.menu-desc-item.visible').removeClass('visible');
+
     TweenMax.to('.menu-desc-item.default', 0.2, {opacity: 1, y: 0, ease: Power3.easeOut});
   }
 }
 
 function click() {
+  console.log('click');
   if (window['menuItemClicked'] === false && window['menuItemAnimation'] === false) {
     window['menuItemClicked'] = true;
     var artistId = $(this).attr('data-artist');
