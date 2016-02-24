@@ -864,6 +864,11 @@ body {
 
 #barrese {
 	background: radial-gradient(circle, #444 10%, #000 120%);
+
+	.canvas-container {
+		border-radius: 50%;
+    	background-color: white;
+	}
 }
 
 /******************************************************************************

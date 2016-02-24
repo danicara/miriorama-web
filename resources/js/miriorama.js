@@ -207,7 +207,7 @@ Karl Gerstner
 
     $('#gerstner').click(function(){
       for (var i = 0; i < 5; i++) {
-        TweenMax.to('#gerstner .circle-' + (i+1), 1, {rotation: variations[gerstnerCountClick][i], force3D: true});
+        TweenMax.to('#gerstner .circle-' + (i+1), 1, {rotation: variations[gerstnerCountClick][i], force3D: true, ease: Power2.easeInOut});
       }
 
       $('#gerstner .step').removeClass('visible');
@@ -246,13 +246,13 @@ Antonio Barrese
       canvas.clear();
       canvas.setHeight($container.height());
       canvas.setWidth($container.width());
-      canvas.backgroundColor = 'white';
+      //canvas.backgroundColor = 'white';
 
       var f = canvas.width / 100;
 
-      canvas.clipTo = function (ctx) {
+      /*canvas.clipTo = function (ctx) {
         ctx.arc(f*100 / 2,f*100 / 2,f*90 / 2,0,2*Math.PI);
-      };
+      };*/
 
       var r = 40 * f;
       var n = 48;
