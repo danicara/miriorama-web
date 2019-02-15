@@ -1,25 +1,16 @@
-/**
- * Miriorama.js
- */
-;(function(window, document, undefined) {
+let MIRIORAMA = (function(){
   'use strict';
 
-  var NAME = 'Miriorama';
-  var animations = {};
+  let animations = {};
+  let miriorama = {};
 
-  function Miriorama() {
-  }
-
-/******************************************************************************
-Home
-******************************************************************************/
-
-  Miriorama.prototype.home = {};
-  Miriorama.prototype.home.show = function(callback) {  
+  /* HOME */
+  miriorama.home = {};
+  miriorama.home.show = function(callback) {  
     var tl = new TimelineMax();
     var tlr = new TimelineMax();
 
-    tl.eventCallback("onComplete", callback);
+    tl.eventCallback('onComplete', callback);
     
     //$('.menu-desc-item.default').addClass('visible');
     tl.to('.menu-desc-item.default', 0.5, {opacity: 1, y: 0});
@@ -30,39 +21,21 @@ Home
     //rotazione infinita menu
     tlr.to('.menu-circle', 80, {rotation: 360, ease:Linear.easeNone, repeat: -1}, '-=1');
   }
-  Miriorama.prototype.home.hide = function(callback) { 
+  miriorama.home.hide = function(callback) { 
     var tl = new TimelineMax();
-    tl.eventCallback("onComplete", callback);
+    tl.eventCallback('onComplete', callback);
 
     $('.menu-desc-item').removeClass('visible');
     tl.to('.menu-desc-item.default', 0.5, {opacity: 0, y: 0});
 
     tl.staggerTo('.menu-item', 0.5, {opacity: 0, ease: Power4.easeIn}, 0.1);
     tl.to('.menu-circle', 0.8, {rotation: 0, opacity: 0, ease: Power4.easeIn});
-
-
   }
-  Miriorama.prototype.home.initialize = function() { 
+  miriorama.home.initialize = function() {};
 
-
-    //var tl2 = TweenMax.to('.menu-circle', 80, {rotation: 360, ease:Linear.easeNone, repeat: -1, paused: true});
-
-    //animations['homepage-menu-infinite-rotation'] = tl2;
-
-    //rotazione infinita menu
-    //animations['homepage-menu-rotate'] = TweenMax.to('.menu-circle', 80, {rotation: 360, ease:Linear.easeNone, repeat: -1, paused: true});
-
-    //animazione menu IN
-    //animations['homepage-menu-opacity'] = TweenMax.from('.menu-circle', 1, {opacity: 0, ease: Power4.easeIn, paused: true});
-    //animations['homepage-menu-items'] = TweenMax.to('.menu-item', 0.5, {opacity: 1, y: 0, ease: Power4.easeIn, paused: true}, 0.1);
-  }
-
-/******************************************************************************
-Bruno Munari
-******************************************************************************/
-
-  Miriorama.prototype.munari = {};
-  Miriorama.prototype.munari.initialize = function() { 
+  /* BRUNO MUNARI */
+  miriorama.munari = {};
+  miriorama.munari.initialize = function() { 
     var canvas = new fabric.Canvas('munariCanvas');
     canvas.selection = false;
 
@@ -174,13 +147,10 @@ Bruno Munari
     }
   }
 
-/******************************************************************************
-Karl Gerstner
-******************************************************************************/
-
+  /* KARL GERSTNER */
   var gerstnerCountClick = 1;
-  Miriorama.prototype.gerstner = {};
-  Miriorama.prototype.gerstner.hide = function (callback) {
+  miriorama.gerstner = {};
+  miriorama.gerstner.hide = function (callback) {
       for (var i = 0; i < 5; i++) {
         TweenMax.to('#gerstner .circle-' + (i+1), 1, {rotation: 0, force3D: true});
       }
@@ -188,7 +158,7 @@ Karl Gerstner
 
       callback();
   }
-  Miriorama.prototype.gerstner.initialize = function() {
+  miriorama.gerstner.initialize = function() {
     var variations = {
       0: [   0,   0,   0,   0,   0],
       1: [   0,   4,   8,  15,  36],
@@ -200,18 +170,15 @@ Karl Gerstner
       7: [   0,  90,  90,  90,   0],
       8: [   0, -90, -90, -90,   0],
       9: [   0, 180, 180, 180, 180],
-     10: [   0, 180,  90,  45,   0],
-     11: [   0, 360, 180,  90,  45],
-     12: [   0,  45,  90, 180,   0],
+    10: [   0, 180,  90,  45,   0],
+    11: [   0, 360, 180,  90,  45],
+    12: [   0,  45,  90, 180,   0],
     };
 
     $('#gerstner').click(function(){
       for (var i = 0; i < 5; i++) {
         TweenMax.to('#gerstner .circle-' + (i+1), 1, {rotation: variations[gerstnerCountClick][i], force3D: true, ease: Power2.easeInOut});
       }
-
-      $('#gerstner .step').removeClass('visible');
-      $('#gerstner .step-' + (gerstnerCountClick + 1)).toggleClass('visible');
 
       gerstnerCountClick += 1;
 
@@ -220,20 +187,17 @@ Karl Gerstner
       }
     });
 
-    //Draggable.create("#gerstner .circle", {type: "rotation", throwProps: true, throwResistance: 1});
+    //Draggable.create('#gerstner .circle', {type: 'rotation', throwProps: true, throwResistance: 1});
   } 
 
-/******************************************************************************
-Antonio Barrese
-******************************************************************************/
-
-  Miriorama.prototype.barrese = {};
-  Miriorama.prototype.barrese.hide = function(callback) {
+  /* ANTONIO BARRESE */
+  miriorama.barrese = {};
+  miriorama.barrese.hide = function(callback) {
     var tl = new TimelineMax();
-    tl.eventCallback("onComplete", callback);
+    tl.eventCallback('onComplete', callback);
     tl.to(animations['barrese-animation'], 1, {timeScale: 0});
   };
-  Miriorama.prototype.barrese.initialize = function() {
+  miriorama.barrese.initialize = function() {
     var canvas = new fabric.Canvas('barreseCanvas');
     canvas.selection = false;
     canvas.renderOnAddRemove = false;
@@ -299,7 +263,7 @@ Antonio Barrese
       animations['barrese-animation'].timeScale(0);
 
       /*canvas.on('mouse:down', function() {
-         TweenLite.to(tween, 4, {timeScale: 1});
+        TweenLite.to(tween, 4, {timeScale: 1});
       });*/
 
       /*canvas.on('touch:drag', function(options) {
@@ -332,13 +296,10 @@ Antonio Barrese
     }
   }
 
-/******************************************************************************
-Ennio Chiggio
-******************************************************************************/
-
+  /* ENNIO CHIGGIO */
   var countClick = 1;
-  Miriorama.prototype.chiggio = { };
-  Miriorama.prototype.chiggio.initialize = function() {
+  miriorama.chiggio = { };
+  miriorama.chiggio.initialize = function() {
     var $container = $('#chiggio .container');
     var positions = [[0,0,180,0],[0,90,180,-90],[-45,-135,315,-135]];
     
@@ -424,19 +385,16 @@ Ennio Chiggio
     });
   }
 
-/******************************************************************************
-Grazia Varisco
-******************************************************************************/
-
-  Miriorama.prototype.varisco = {};
-  Miriorama.prototype.varisco.hide = function(callback) { 
+  /* GRAZIA VARISCO */
+  miriorama.varisco = {};
+  miriorama.varisco.hide = function(callback) { 
     var tl = new TimelineMax();
-    tl.eventCallback("onComplete", callback);
+    tl.eventCallback('onComplete', callback);
 
     tl.to(animations['varisco-bottom'], 1, {timeScale: 0});
-    tl.to(animations['varisco-top'], 1, {timeScale: 0}, "-=1");
+    tl.to(animations['varisco-top'], 1, {timeScale: 0}, '-=1');
   }
-  Miriorama.prototype.varisco.initialize = function() {
+  miriorama.varisco.initialize = function() {
     var $container = $('#varisco .container');
 
     var canvas = new fabric.Canvas('variscoCanvasBottom');
@@ -462,14 +420,14 @@ Grazia Varisco
       $('#variscoCanvasTop').css({top: -$container.height()*0.25, left: -$container.width()*0.25});
 
       //ritaglio i canvas a forma di cerchio
-      /*var ctx = canvas.getContext("2d");
+      /*var ctx = canvas.getContext('2d');
       ctx.beginPath();
       ctx.arc(canvas.width / 2,canvas.width / 2,canvas.width / 2,0,2*Math.PI);
       ctx.closePath();
       ctx.stroke();
       ctx.clip();
 
-      var ctxTop = canvasTop.getContext("2d");
+      var ctxTop = canvasTop.getContext('2d');
       ctxTop.beginPath();
       ctxTop.arc(canvasTop.width / 2,canvasTop.width / 2,canvasTop.width / 2,0,2*Math.PI);
       ctxTop.closePath();
@@ -493,11 +451,11 @@ Grazia Varisco
         r1: 0,
         r2: bkg.width / 2,
         colorStops: {
-          0: "#092EDB",
-          0.25: "#092EDB",
-          0.55: "#48ABFB",
-          0.75: "#092EDB",
-          1: "#092EDB"
+          0: '#092EDB',
+          0.25: '#092EDB',
+          0.55: '#48ABFB',
+          0.75: '#092EDB',
+          1: '#092EDB'
         }
       });
       canvas.add(bkg);
@@ -596,21 +554,17 @@ Grazia Varisco
 
     /*var $el = $('#varisco .upper-canvas').closest('.canvas-container');
 
-    TweenLite.set($el, {transformOrigin:"33% 33%"})
-    var myDrag = Draggable.create($el, {type: "rotation", throwProps: true, onDrag: onDrag})[0];
+    TweenLite.set($el, {transformOrigin:'33% 33%'})
+    var myDrag = Draggable.create($el, {type: 'rotation', throwProps: true, onDrag: onDrag})[0];
     function onDrag() {
       TweenLite.to('#variscoCanvasBottom', 0, {rotation: -this.rotation});
     }*/
   }
-}
+  }
 
-
-/******************************************************************************
-Marina Apollonio
-******************************************************************************/
-
-  Miriorama.prototype.apollonio = {};
-  Miriorama.prototype.apollonio.initialize = function(){
+  /* MARINA APOLLONIO */
+  miriorama.apollonio = {};
+  miriorama.apollonio.initialize = function(){
     var size = 100;
     var s = Snap('#apollonio svg');
     var x = 0, y = 0;
@@ -638,7 +592,7 @@ Marina Apollonio
       size = size - (100/36); 
     }
 
-    Draggable.create("#apollonio .svg-container", {type: "rotation", throwProps: true, throwResistance: 1});
+    Draggable.create('#apollonio .svg-container', {type: 'rotation', throwProps: true, throwResistance: 1});
     /*
     $('#apollonio').click(function() {
       var rotation = 365 * 5 ;
@@ -647,12 +601,9 @@ Marina Apollonio
   }
 
 
-/******************************************************************************
-Alberto Biasi
-******************************************************************************/
-
-  Miriorama.prototype.biasi = {};
-  Miriorama.prototype.biasi.initialize = function() { 
+  /* ALBERTO BIASI */
+  miriorama.biasi = {};
+  miriorama.biasi.initialize = function() { 
     var canvas = new fabric.Canvas('biasiCanvasBottom');
     var canvasTop = new fabric.Canvas('biasiCanvasTop');
     canvas.selection = false;
@@ -735,7 +686,7 @@ Alberto Biasi
         });
 
         if (i <= 2) {
-          circle.fill = "#000";
+          circle.fill = '#000';
         }
         circleG.add(circle);        
       }
@@ -788,14 +739,9 @@ Alberto Biasi
         TweenMax.to('#biasiCanvasTop', 0.5, {y: y});
       }
 
-
       //TweenMax.to('#biasiCanvasTop', 2, {y: 100, ease: Power4.easeInOut, repeat: -1, yoyo: true});
     }
   }
 
-  // Expose Miriorama
-  window[NAME] = Miriorama;
-
-})(window, document);
-
-var miriorama = new Miriorama();
+  return miriorama;
+})();

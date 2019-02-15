@@ -1,55 +1,41 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Miriorama Web</title>
-        <meta name="description" content="Digitalizzazione dell'Arte Programmata tra tautologia e tecnologia">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="description" content="Digitization of the Programmed Art between tautology and technology">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="msapplication-tap-highlight" content="no" />
         <link rel="icon" href="favicon.ico">
 
-        <!--<link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet" type="text/css">
-		<link href="https://fonts.googleapis.com/css?family=Merriweather:400,700" rel="stylesheet" type="text/css">
-		<link href="https://fonts.googleapis.com/css?family=Arapey" rel="stylesheet" type="text/css">-->
-        <link rel="stylesheet" href="vendors/normalize.css">
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Merriweather:300,400,700" rel="stylesheet">
+        
         <link rel="stylesheet" href="resources/css/style.css">
 
-        <script src="vendors/jquery-2.1.4.min.js"></script>
+        <script src="vendors/jquery-3.3.1.min.js"></script>
         <script src="vendors/greensock-js/TweenMax.min.js"></script>
         <script src="vendors/greensock-js/Draggable.min.js"></script>
         <script src="vendors/greensock-js/ThrowPropsPlugin.min.js"></script>        
 	    <script src="vendors/snap.svg-min.js"></script>
 		<script src="vendors/fabric.min.js"></script>
-		<script src="vendors/handlebars-v4.0.5.js"></script>
 
-        <script id="menu-template" type="text/x-handlebars-template">
-    		<div class="menu-desc">
-				<div class="menu-desc-item default" data-artist="home">
-					<span class="menu-item-initials">MIRIORAMA</span>
-					<span class="menu-item-artist">WEB</span>
-					<span class="menu-item-title">Digitalizzazione dell&#39;Arte Programmata <br> tra tautologia e tecnologia</span>
-				</div>
-	        	{{#each artists}}         	
-					<div class="menu-desc-item" data-artist="{{id}}">
-						<img class="menu-desc-logo" src="resources/img/loghi/{{id}}.svg">
-						<span class="menu-item-artist">{{artist}}</span>
-						<div class="menu-item-title">{{title}}</div>
-					</div>
-				{{/each}}
+		<script id="menu-template-desc" type="text/template">
+			<div class="menu-desc-item" data-artist="{{id}}">
+				<img class="menu-desc-logo" src="resources/img/loghi/{{id}}.svg" alt="{{artist}}">
+				<span class="menu-item-artist">{{artist}}</span>
+				<div class="menu-item-title">{{title}}</div>
 			</div>
-
-			<div class="menu-circle">
-	        	{{#each artists}}  
-		        	<div class="menu-item no-select" style="top: {{top}}; left: {{left}};" data-artist="{{id}}">
-		        		<img class="menu-item-logo no-select" src="resources/img/loghi/{{id}}.svg">
-		    		</div>
-				{{/each}}
-    		</div> 
 		</script>
-    	
+		<script id="menu-template-item" type="text/template">
+			<div class="menu-item no-select" style="top: {{top}}; left: {{left}};" data-artist="{{id}}">
+				<img class="menu-item-logo no-select" src="resources/img/loghi/{{id}}.svg">
+			</div>
+		</script>
+
+		<script src="resources/js/miriorama.js"></script>	
         <script src="resources/js/main.js"></script>
-        <script src="resources/js/miriorama.js"></script>
  	</head>
     <body>
     	<div class="navigation">
@@ -69,12 +55,20 @@
         </div>
 
         <div id="home" class="section">
-        	<div class="container">       		
+        	<div class="container"> 
+				<div class="menu-desc">
+					<div class="menu-desc-item default" data-artist="home">
+						<span class="menu-item-initials">MIRIORAMA</span>
+						<span class="menu-item-artist">WEB</span>
+						<span class="menu-item-title">Digitization of the Programmed Art<br>between tautology and technology</span>
+					</div>
+				</div>				
+				<div class="menu-circle"></div>      		
 			</div>
 
 			<div class="bottom-right">
-				<a href="https://github.com/danicara/miriorama-web" title="Codice sorgente su GitHub"><img class="github-icon" src="resources/css/img/github.png" alt="Source on Github"></a>
-				<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" title="Licenza Creative Commons"><img alt="Licenza Creative Commons" style="border-width:0" src="resources/css/img/creative-commons.png" /></a>
+				<a href="https://github.com/danicara/miriorama-web" title="Source on Github"><img class="github-icon" src="resources/css/img/github.png" alt="Source on Github"></a>
+				<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" title="Creative Commons license"><img alt="Creative Commons license" style="border-width:0" src="resources/css/img/creative-commons.png" /></a>
 			</div>
         </div>
 
@@ -84,7 +78,7 @@
 			</div>
 
 			<div class="steps">
-				<div class="step step-1"><span class="action">Trascina</span> per interagire.</div>
+				<div class="step step-1"><span class="action">Drag</span> to interact.</div>
 			</div>
     	</div>
 
@@ -105,8 +99,8 @@
 			</div>
 
 			<div class="steps">
-				<div class="step step-1"><span class="action">Tocca</span> lo sfondo per cambiare configurazione <br/>
-				o <span class="action">trascina</span> per ruotare manualmente.
+				<div class="step step-1"><span class="action">Touch</span> the background to change composition <br/>
+				or <span class="action">drag</span> manually.
 				</div>
 			</div>
 		</div>
@@ -126,19 +120,7 @@
 			</div>
 
 			<div class="steps">
-				<div class="step step-1"><span class="action">Tocca</span> per cambiare configurazione.</div>
-				<div class="step step-2">Rotazione cerchi da destra dall'unità inferiore</div>
-				<div class="step step-3">Rotazione dall'unità minore verso sinistra</div>
-				<div class="step step-4">Rotazione dalle due unità minori verso destra</div>
-				<div class="step step-5">Rotazione dalle tre unità minori verso destra</div>
-				<div class="step step-6">Rotazione cerchi per 45° verso sinistra</div>
-				<div class="step step-7">Rotazione cerchi per 60° verso sinistra</div>
-				<div class="step step-8">Rotazione cerchi per 90° verso destra</div>
-				<div class="step step-9">Rotazione cerchi per 90° verso sinistra</div>
-				<div class="step step-10">Rotazione cerchi per 180°</div>
-				<div class="step step-11">Rotazione progressiva per 180°, 90°, 45° verso destra</div>
-				<div class="step step-12">Rotazione progressiva per 360°, 180°, 90°, 45° verso destra</div>
-				<div class="step step-13">Rotazione progressiva per 45°, 90°, 180° verso destra</div>
+				<div class="step step-1"><span class="action">Touch</span> to interact.</div>
 			</div>
 		</div>
 
@@ -150,7 +132,7 @@
 			</div>
 
 			<div class="steps">
-				<div class="step step-1"><span class="action">Trascina</span> per interagire.</div>
+				<div class="step step-1"><span class="action">Drag</span> to interact.</div>
 			</div>
 		</div>
 
@@ -160,8 +142,8 @@
 			</div>
 
 			<div class="steps">
-				<div class="step step-1 first"><span class="action">Tocca</span> per iniziare.</div>
-				<div class="step step-2"><span class="action">Tocca</span> per fermare l'animazione.</div>
+				<div class="step step-1 first"><span class="action">Touch</span> to start.</div>
+				<div class="step step-2"><span class="action">Touch</span> to stop.</div>
 			</div>
 		</div>
 
@@ -172,8 +154,8 @@
 			</div>
 
 			<div class="steps">
-				<div class="step step-1"><span class="action">Tocca</span> per iniziare.</div>
-				<div class="step step-2"><span class="action">Tocca</span> per fermare l'animazione.</div>
+				<div class="step step-1"><span class="action">Touch</span> to start.</div>
+				<div class="step step-2"><span class="action">Touch</span> to stop.</div>
 			</div>
 		</div>
 
@@ -184,7 +166,7 @@
 			</div>
 
 			<div class="steps">
-				<div class="step step-1"><span class="action">Trascina</span> per interagire.</div>
+				<div class="step step-1"><span class="action">Drag</span> to interact.</div>
 			</div>
 		</div>
     </body>

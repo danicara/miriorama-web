@@ -1,75 +1,14 @@
-@font-face {
-  font-family: 'Roboto';
-  font-weight: 300;
-  font-style: normal;
-  src: url('fonts/Roboto-300/Roboto-300.eot');
-  src: url('fonts/Roboto-300/Roboto-300.eot?#iefix') format('embedded-opentype'),
-       local('Roboto Light'),
-       local('Roboto-300'),
-       url('fonts/Roboto-300/Roboto-300.woff2') format('woff2'),
-       url('fonts/Roboto-300/Roboto-300.woff') format('woff'),
-       url('fonts/Roboto-300/Roboto-300.ttf') format('truetype'),
-       url('fonts/Roboto-300/Roboto-300.svg#Roboto') format('svg');
-}
-@font-face {
-  font-family: 'Merriweather';
-  font-weight: 400;
-  font-style: normal;
-  src: url('fonts/Merriweather-regular/Merriweather-regular.eot');
-  src: url('fonts/Merriweather-regular/Merriweather-regular.eot?#iefix') format('embedded-opentype'),
-       local('Merriweather'),
-       local('Merriweather-regular'),
-       url('fonts/Merriweather-regular/Merriweather-regular.woff2') format('woff2'),
-       url('fonts/Merriweather-regular/Merriweather-regular.woff') format('woff'),
-       url('fonts/Merriweather-regular/Merriweather-regular.ttf') format('truetype'),
-       url('fonts/Merriweather-regular/Merriweather-regular.svg#Merriweather') format('svg');
-}
-@font-face {
-  font-family: 'Merriweather';
-  font-weight: 700;
-  font-style: normal;
-  src: url('fonts/Merriweather-700/Merriweather-700.eot');
-  src: url('fonts/Merriweather-700/Merriweather-700.eot?#iefix') format('embedded-opentype'),
-       local('Merriweather Bold'),
-       local('Merriweather-700'),
-       url('fonts/Merriweather-700/Merriweather-700.woff2') format('woff2'),
-       url('fonts/Merriweather-700/Merriweather-700.woff') format('woff'),
-       url('fonts/Merriweather-700/Merriweather-700.ttf') format('truetype'),
-       url('fonts/Merriweather-700/Merriweather-700.svg#Merriweather') format('svg');
-}
-@font-face {
-  font-family: 'Arapey';
-  font-weight: 400;
-  font-style: normal;
-  src: url('fonts/Arapey-regular/Arapey-regular.eot');
-  src: url('fonts/Arapey-regular/Arapey-regular.eot?#iefix') format('embedded-opentype'),
-       local('Arapey Regular'),
-       local('Arapey-regular'),
-       url('fonts/Arapey-regular/Arapey-regular.woff2') format('woff2'),
-       url('fonts/Arapey-regular/Arapey-regular.woff') format('woff'),
-       url('fonts/Arapey-regular/Arapey-regular.ttf') format('truetype'),
-       url('fonts/Arapey-regular/Arapey-regular.svg#Arapey') format('svg');
-}
-
-html {
+html, body {
 	height: 100%;
 	width: 100%;
+	margin: 0;
+	padding: 0;
 	overflow: hidden;
 	font-family: 'Merriweather', serif;
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-
-body {
-	height: 100%;
-	width: 100%;
-	overflow: hidden;
-	position: absolute;
-	top: 0;
-	left: 0;
-
 	color: #464646;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 
 .section {
@@ -131,10 +70,6 @@ body {
 	color: #fff;
 }
 
-.section-desc .desc-home {
-
-}
-
 .steps {
   font-size: 0.8em;
   position: fixed;
@@ -164,25 +99,25 @@ body {
 }
 
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+	0% {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 @keyframes fadeOut {
-    0% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(10px);
-    }
+	0% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	100% {
+		opacity: 0;
+		transform: translateY(10px);
+	}
 }
 
 .step .action {
@@ -197,8 +132,10 @@ body {
   max-width: 90vh;
   margin: auto;
   position: absolute;
-  top:0;bottom:0;
-  left:0;right:0;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
 }	
 
 .navigation {
@@ -228,24 +165,6 @@ body {
 	}
 }
 
-/*.container .row {
-	display: flex;
-	justify-content: space-between;
-	margin-top: 0%;
-	height: 10%;
-}*/
-
-/*.aspect-ratio {
-	width: 100vw; 
-    height: 90vw;
-    max-height: 90vh;
-    max-width: 90vh;
-    margin: auto;
-    position: absolute;
-    top:0;bottom:0;
-    left:0;right:0;
-}*/
-
 .no-select {
 	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   -webkit-touch-callout: none;
@@ -255,8 +174,6 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
-
-/* Home ---------------------------------------------------------------------- */
 
 #home {
 	display: block;
@@ -287,10 +204,6 @@ body {
 		height: 100%;
 
 		opacity: 0;
-		//transform: translateY(-10px);
-
-		//transform: scale(0);
-	  //animation: rotating 100s linear infinite;
 	}
 	.menu-desc {
     text-align: center;
@@ -338,16 +251,6 @@ body {
 	  }
 	}
 	
-	.menu {
-		display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    list-style: none;
-    flex-wrap: wrap;
-    font-size: 12px;
-	}
-
 	.menu-item {
 	    height: 14%;
 	    width: 14%;
@@ -422,11 +325,6 @@ body {
     width: 70%;
     display: inline-block;
 	}
-	.menu-item-initials {
-    font-size: 20vmin;
-    font-family: 'Arapey', serif;
-    line-height: 18vmin;
-	}
 
 	.menu-desc-item.default {
 		top: 2vmin;
@@ -439,15 +337,16 @@ body {
 	}
 
 	.menu-desc-item.default .menu-item-artist {
-    font-size: 20vmin;
-    font-family: 'Arapey', serif;
+    font-size: 17vmin;
+    font-family: "Merriweather", serif;
     font-weight: 100;
     line-height: 16vmin;
+    margin-left: 2vmin;
 	}
 
 	.menu-desc-item.default .menu-item-title {
     font-family: 'Roboto', sans-serif;
-    font-size: 2.3vmin;
+    font-size: 2.4vmin;
 	}
 
 	.bottom-right {
@@ -477,12 +376,7 @@ body {
 	}
 }
 
-
-
-/* Munari -------------------------------------------------------------------- */
-
 #munari {
-
 	.container {
 		width: 80vw; 
     height: 80vw;
@@ -493,40 +387,8 @@ body {
     position: absolute;
     top:0;bottom:0;
     left:0;right:0;
-	}	
-
-	.container .row {
-		display: flex;
-  		justify-content: space-between;
-	    margin-top: 0%;
-	    height: 10%;
-	}
-
-	.line {
-		float: left;
-		//transition: 0.2s;
-    	width: 10%;
-
-    	display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-
-	.line::after {
-		content: "";
-	    display: inline-block;
-		background-color: #000;
-		width: 4px;
-		height: 15px;
-		border-radius: 4px;
-		float: left;
 	}
 }
-
-
-
-	/* Gerstner -------------------------------------------------------------------- */
-
 #gerstner {
 	.circle {
 		position: relative;
@@ -543,7 +405,6 @@ body {
 		transform: translate(-1px, -1px);
 		border: solid 1px transparent;
 	}
-
 
 	.circle-1 {
 		top: 0;
@@ -582,56 +443,6 @@ body {
 	    padding: 0 375%;
 	}
 }
-
-/* Massironi -------------------------------------------------------------------- */
-
-#massironi {
-	.box {
-		float:left;
-		position: relative;
-		width:50%;
-		height: 50%;
-
-	}
-
-	.square {
-		width: 100%;
-	    height: 100%;
-	    box-sizing: border-box;	
-		border: solid 2px #999;
-	    //outline: solid 1px #999;
-	    position: absolute;
-	    -webkit-transition: all 900ms cubic-bezier(0.645, 0.045, 0.355, 1);
-	  	transition:         all 900ms cubic-bezier(0.645, 0.045, 0.355, 1);
-	  	-webkit-backface-visibility: hidden;
-		backface-visibility: hidden;
-
-	}
-	.square.reset {
-
-		transform: rotate(0deg) !important;
-		width: 100% !important;
-		height: 100% !important;
-		top: 0 !important;
-		left: 0 !important;
-	}
-
-	.box-1 {
-
-	}
-	.box-2 {
-
-	    transform: rotateY(180deg) translateX(2px);
-	}
-	.box-3 {
-		transform: translateY(-2px) rotateY(180deg);
-	}
-	.box-4 {
-		transform: translateY(-2px) translateX(-2px);
-	}
-}
-/* Apollonio -------------------------------------------------------------------- */
-
 #apollonio {
 	background: radial-gradient(circle, #FFFFFF 10%, #E8E8E8 120%);
 
@@ -649,180 +460,7 @@ body {
 		height: 100%;
     width: 100%;
 	}
-
-	#apollonioSvg {
-  		//transition: transform 15s;
-	}
-
-	.circle {
-		//transition-duration: 10s;
-		border-radius: 50%;
-		height: 100%;
-		width: 100%;
-	    top: 45%;
-		margin: 0 auto;
-		position: absolute;
-	}
 }
-
-/* Chiggio -------------------------------------------------------------------- */
-
-#chiggio-2 {
-
-	.container {
-		width: 90vw; 
-	    height: 90vw;
-	    max-height: 90vh;
-	    max-width: 90vh;
-	    margin: auto;
-	    position: absolute;
-	    top:0;bottom:0;
-	    left:0;right:0;
-	}	
-
-	.container .row {
-		display: flex;
-  		justify-content: space-between;
-  		    margin-top: 0%;
-	    height: 6.67%;
-	}
-
-	.line {
-	    display: inline-block;
-		float: left;
-		transition: 1s;
-	}
-
-	.line-content {
-	    display: inline-block;
-		background-color: #000;
-		width: 4px;
-		height: 15px;
-		border-radius: 4px;
-		float: left;
-		margin: 10px;
-	}
-
-	.item {
-	    width: 6.67%;
-	    height: 100%;
-	    position: relative;
-	    overflow: hidden;
-	}
-
-	.half {
-	    position: absolute;
-	    width: 100%;
-	    top: -50%;
-	    left: -50%;
-	    background-color: #000;
-	    height: 200%;
-	    transform-origin: 100% 50%;
-	}
-}
-
-/* Landi -------------------------------------------------------------------- */
-
-.landi {
-	.container {
-		perspective: 1000px;
-		transform: rotate(45deg);
-
-		width: 100vw; 
-	    height: 90vw;
-	    max-height: 70vh;
-	    max-width: 70vh;
-	    margin: auto;
-	    position: absolute;
-	    top:0;bottom:0;
-	    left:0;right:0;
-	}	
-
-	.row:last-child .item {
-		margin-bottom: 0;
-	}
-
-	.row .item:last-child {
-		margin-right: 0;
-	}
-
-	.item {
-	    height: 6.25%;
-	    width: 6.25%;
-	    position: relative;
-	    float: left;
-	    margin: 0 6.25% 6.25% 0;
-    }
-
-    .front {
-        background-color: #fff;
-	    position: absolute;
-	    top: 0;
-	    left: 0;
-
-	    width:100%;
-	    height: 100%;
-
-	    outline: solid #fff 1px;
-
-		transform: rotateY(-30deg);
-    	transform-origin: 0 0;
-
-    	cursor: pointer;
-    	transition-duration: 0.5s;
-    }	
-
-    .item-t .front {
-        transform: rotate3d(1, 0, 0, 35deg);
-        transform-origin: 100% 0;
-        //top: -1px;
-        background-color: #f9f9f9;
-        outline-color: #f9f9f9;
-    }
-
-    .item-b .front {
-        transform: rotate3d(1, 0, 0, 35deg);
-        transform-origin: 0 100%;
-        //top: 1px;
-        background-color: #f5f5f5;
-   		outline-color: #f5f5f5;
-    }
-
-    .item-r .front {
-        transform: rotate3d(0, 1, 0, 35deg);
-        transform-origin: 100% 0;
-        //left: 1px;
-        background-color: #f0f0f0;
-   		outline-color: #f0f0f0;
-    }    
-
-    .item-r .back {
-    	box-shadow:	-1px 4px 6px -2px #eee;
-    }
-
-    .item-l .front {
-        transform: rotate3d(0, 1, 0, 35deg);
-        transform-origin: 0 100%;
-        //left: -1px;
-        outline-color: #fff;
-    }
-
-    .back {
-        background-color: #000;
-	    position: absolute;
-	    top: 0;
-	    left: 0;
-
-	    width:100%;
-	    height: 100%;
-
-        box-shadow: 2px 2px 6px 0px #eee;
-    }	
-}
-
-
-/* Chiggio -------------------------------------------------------------------- */
-
 #chiggio {
 	background: radial-gradient(circle, #2F2F2F 10%, #000000 120%);
 
@@ -861,7 +499,6 @@ body {
 		z-index: 1;
 	}
 }
-
 #barrese {
 	background: radial-gradient(circle, #444 10%, #000 120%);
 
@@ -870,11 +507,6 @@ body {
     	background-color: white;
 	}
 }
-
-/******************************************************************************
-VARISCO
-******************************************************************************/
-
 #varisco {
 	background: radial-gradient(circle, rgb(17, 17, 17) 10%, rgb(0, 0, 0) 120%);
 
@@ -908,11 +540,6 @@ VARISCO
   	top:0;
   }
 }
-
-/******************************************************************************
-BIASI
-******************************************************************************/
-
 #biasi {
 
 	.canvas-container {
@@ -932,9 +559,6 @@ BIASI
   }
 }
 
-
-
-// Small devices (landscape phones, 34em and up)
 @media (max-width: 34em) {
 	.steps {
     width: 90vw;
@@ -969,15 +593,3 @@ BIASI
     text-align: center;
 	}
 }
-/*
-// Medium devices (tablets, 48em and up)
-@media (min-width: 48em) { }*/
-
-// Large devices (desktops, 62em and up)
-@media (min-width: 62em) {
-
-}
-
-/*
-// Extra large devices (large desktops, 75em and up)
-@media (min-width: 75em) { }*/
